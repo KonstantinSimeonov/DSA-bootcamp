@@ -1,0 +1,15 @@
+{
+  "name": "linked-list",
+  "version": "1.0.0",
+  "description": "Implement a linked list and unit test it.",
+  "main": "linked-list.js",
+  "scripts": {
+    "test": "mocha '*.test.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}
