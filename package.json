@@ -4,7 +4,7 @@
   "description": "Implement a linked list and unit test it.",
   "main": "linked-list.js",
   "scripts": {
-    "test": "mocha '*.test.js'"
+    "test": "mocha '**/*.test.js'"
   },
   "author": "",
   "license": "ISC",
