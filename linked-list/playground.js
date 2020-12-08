@@ -7,6 +7,8 @@ const {
   length,
   removeAt,
   remove,
+  insert,
+  reverse,
 } = require("./linked-list");
 
 let list = empty();
@@ -17,5 +19,7 @@ append(2, list);
 prepend(6, list);
 
 console.log(JSON.stringify(list));
-remove(6, list);
+
+reverse(list);
+
 console.log(JSON.stringify(list));

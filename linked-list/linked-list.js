@@ -131,12 +131,47 @@ const remove = (value, list) => {
 /**
  * reverses the list
  */
-const reverse = (list) => {};
+const reverse = (list) => {
+  let current = list.root;
+  let prev = null;
+  let tail = current.tail;
+  while (current.tail) {
+    tail = current.tail;
+    current.tail = prev;
+    prev = current;
+    current = tail;
+  }
+  return list;
+};
 
 /**
  * inserts a value at the given index in the list
  */
-const insert = (value, at, list) => {};
+const insert = (value, at, list) => {
+  let i = 1;
+  let current = list.root;
+  if (at === 0) {
+    prepend(value, list);
+  }
+  while (current.tail) {
+    if (i === at) {
+      let tail = current.tail;
+      let previous = current;
+      let newCurrent = {
+        value,
+        tail,
+      };
+      current = newCurrent;
+
+      previous.tail = current;
+    }
+    i++;
+    current = current.tail;
+  }
+  if (i >= at) {
+    append(value, list);
+  }
+};
 
 //module.exports.append = append;
 // Allow other scripts to load this object

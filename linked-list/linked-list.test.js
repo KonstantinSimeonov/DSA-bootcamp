@@ -105,7 +105,7 @@ describe("Linked list", () => {
     expect(List.toArray(List.reverse(list))).to.deep.equal(input.reverse());
   });
 
-  it.skip("Can use List.insert to insert stuff", () => {
+  it("Can use List.insert to insert stuff", () => {
     const list = List.empty();
     for (let i = 0; i < 10; ++i) {
       List.append(i, list);
@@ -124,7 +124,7 @@ describe("Linked list", () => {
     );
   });
 
-  it.only("Can use List.remove to remove items", () => {
+  it("Can use List.remove to remove items", () => {
     const list = List.empty();
     for (let i = 0; i < 33; ++i) {
       List.append(i, list);
