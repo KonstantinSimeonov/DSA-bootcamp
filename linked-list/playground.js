@@ -21,5 +21,4 @@ prepend(6, list);
 console.log(JSON.stringify(list));
 
 reverse(list);
-
-console.log(JSON.stringify(list));
+console.log(toArray(list));

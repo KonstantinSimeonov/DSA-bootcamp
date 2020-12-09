@@ -89,7 +89,7 @@ describe("Linked list", () => {
     expect(List.length(list)).to.equal(4);
   });
 
-  it.skip("Can use List.reverse to get the elements in reverse order", () => {
+  it("Can use List.reverse to get the elements in reverse order", () => {
     const input = [
       "on1 - on none",
       "chabata",
@@ -101,8 +101,9 @@ describe("Linked list", () => {
 
     const list = List.empty();
     input.forEach((x) => List.append(x, list));
+    List.reverse(list);
 
-    expect(List.toArray(List.reverse(list))).to.deep.equal(input.reverse());
+    expect(List.toArray(list)).to.deep.equal(input.reverse());
   });
 
   it("Can use List.insert to insert stuff", () => {

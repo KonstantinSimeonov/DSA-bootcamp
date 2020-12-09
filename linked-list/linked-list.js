@@ -141,7 +141,9 @@ const reverse = (list) => {
     prev = current;
     current = tail;
   }
-  return list;
+  tail = current.tail;
+  current.tail = prev;
+  list.root = current;
 };
 
 /**
