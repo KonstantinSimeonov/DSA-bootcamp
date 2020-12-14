@@ -1,5 +1,3 @@
-const { reporters } = require("mocha");
-
 class Node_ {
   constructor(value, next) {
     this.value = value;
@@ -10,14 +8,22 @@ class Node_ {
 class List {
   constructor() {
     this.root = null;
+    this.tail = null;
   }
 
   append(value) {
-    this.insert(Infinity, value);
+    if (!this.root) {
+      this.root = new Node_(value);
+      this.tail = this.root;
+      return;
+    }
+    this.tail.next = new Node_(value);
+    this.tail = this.tail.next;
   }
 
   prepend(value) {
-    this.insert(0, value);
+    this.root = new Node_(value, this.root);
+    this.tail = this.root;
   }
 
   at(index) {
@@ -60,7 +66,7 @@ class List {
 }
 
 const list = new List();
-
+list.prepend(4);
 list.append(5);
 list.append(6);
 list.append(7);
