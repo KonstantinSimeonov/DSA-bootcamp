@@ -83,6 +83,18 @@ class List {
     arr.push(current.value);
     return arr;
   }
+
+  reverse() {
+    let prev = null;
+    let curr = this.root;
+    while (curr) {
+      let next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    [this.root, this.tail] = [this.tail, this.root];
+  }
 }
 
 const list = new List();
@@ -91,5 +103,5 @@ list.append(5);
 list.append(6);
 list.append(7);
 list.append(8);
-console.log(list.toArray());
+list.reverse();
 console.log(JSON.stringify(list));
