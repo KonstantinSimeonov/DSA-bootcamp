@@ -72,6 +72,17 @@ class List {
   get length() {
     return this._length;
   }
+
+  toArray() {
+    const arr = [];
+    let current = this.root;
+    while (current.next) {
+      arr.push(current.value);
+      current = current.next;
+    }
+    arr.push(current.value);
+    return arr;
+  }
 }
 
 const list = new List();
@@ -80,5 +91,5 @@ list.append(5);
 list.append(6);
 list.append(7);
 list.append(8);
-console.log(list.length);
+console.log(list.toArray());
 console.log(JSON.stringify(list));
