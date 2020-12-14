@@ -106,15 +106,19 @@ class List {
   }
 
   remove(value) {
-    this._length -= 1;
+    if (!this.root) {
+      return;
+    }
     if (value === this.root.value) {
       this.root = this.root.next;
+      this.length--;
     }
     let current = this.root;
     let prev = null;
     while (current.next) {
       if (value === current.value) {
         prev.next = current.next;
+        this.length--;
         return;
       }
       prev = current;
@@ -123,13 +127,14 @@ class List {
     if (value === current.value) {
       prev.next = current.next;
       this.tail = prev;
+      this.length--;
     }
   }
 
   removeAt(index) {
-    this.length -= 1;
     if (index === 0) {
       this.root = this.root.next;
+      this.length--;
       return;
     }
     let prev = this.root;
@@ -138,6 +143,7 @@ class List {
     while (current.next) {
       if (i === index) {
         prev.next = current.next;
+        this.length--;
         return;
       }
       i++;
@@ -147,6 +153,7 @@ class List {
     if (i === index) {
       this.tail = prev;
       prev.next = null;
+      this.length--;
     }
   }
 
@@ -162,18 +169,51 @@ class List {
     return newList;
   }
 
-  drop()
+  drop(fun) {
+    let prev = this.root;
+    let current = this.root.next;
+    while (current.next) {
+      if (fun(current.value)) {
+        prev.next = current.next;
+      }
+      prev = current;
+      current = current.next;
+      this._length--;
+    }
+    if (fun(this.root)) {
+      this.root = this.root.next;
+      this._length--;
+    }
+    if (fun(current.value)) {
+      prev.next = current.next;
+      this.tail = prev;
+      this._length--;
+    }
+  }
+
+  reduceLeft(fun, initialValue) {
+    let result = initialValue;
+    let current = this.root;
+    if (arguments.length < 2 && this.root) {
+      result = this.root.value;
+      current = this.root.next;
+    }
+    while (current) {
+      result = fun(result, current.value);
+      current = current.next;
+    }
+    return result;
+  }
+
+  toString() {
+    return `List {${list.reduceLeft((a, b) => `${a} -> ${b}`) || ``}}`;
+  }
 }
 
-const list = new List();
-// list.prepend(4);
-// list.append(5);
-// list.append(6);
-// list.append(7);
-// list.append(8);
+const list = List.of(1, 2, 3, 4, 5);
 
-// console.log(JSON.stringify(list.slice(0, 3).toArray()));
+console.log(JSON.stringify(list.toString()));
 
-const banan = List.of(1, 2, 3, 4, 5);
+list.drop((x) => x % 2 !== 0);
 
-console.log(JSON.stringify(banan));
+console.log(JSON.stringify(list));
