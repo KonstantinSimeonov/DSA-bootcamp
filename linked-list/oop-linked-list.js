@@ -104,6 +104,7 @@ class List {
       curr = next;
     }
     [this.root, this.tail] = [this.tail, this.root];
+    return this;
   }
 
   remove(value) {
@@ -112,14 +113,14 @@ class List {
     }
     if (value === this.root.value) {
       this.root = this.root.next;
-      this.length--;
+      this._length--;
     }
     let current = this.root;
     let prev = null;
     while (current.next) {
       if (value === current.value) {
         prev.next = current.next;
-        this.length--;
+        this._length--;
         return;
       }
       prev = current;
@@ -128,14 +129,14 @@ class List {
     if (value === current.value) {
       prev.next = current.next;
       this.tail = prev;
-      this.length--;
+      this._length--;
     }
   }
 
   removeAt(index) {
     if (index === 0) {
       this.root = this.root.next;
-      this.length--;
+      this._length--;
       return;
     }
     let prev = this.root;
@@ -144,7 +145,7 @@ class List {
     while (current.next) {
       if (i === index) {
         prev.next = current.next;
-        this.length--;
+        this._length--;
         return;
       }
       i++;
@@ -154,7 +155,7 @@ class List {
     if (i === index) {
       this.tail = prev;
       prev.next = null;
-      this.length--;
+      this._length--;
     }
   }
 

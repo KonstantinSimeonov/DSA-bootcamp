@@ -59,6 +59,52 @@ describe("Linked list", () => {
 
   it("Can insert value at a given index of the list", () => {
     const list = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-    expect(list.insert(10, 0).toArray().pop()).to.equal(0);
+    expect(list.insert(10, 0).toArray()[3]).to.equal(4);
+  });
+
+  it("Can create array from list", () => {
+    const list = List.of(1, 2, 3, 4, 5, 6);
+    expect(list.toArray()).to.deep.equal([1, 2, 3, 4, 5, 6]);
+  });
+
+  it("To array from empty list returns empty array", () => {
+    const list = new List();
+    expect(list.toArray()).to.deep.equal([]);
+  });
+
+  it("Can reverse a List", () => {
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const list = List.from(arr);
+    expect(list.reverse().toArray()).to.deep.equal(arr.reverse());
+  });
+
+  it("Can reverse empty list", () => {
+    const arr = [];
+    const list = new List();
+    expect(list.reverse().toArray()).to.deep.equal(arr);
+  });
+
+  it("Can remove from list by value", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const list = List.from(arr);
+    list.remove(1);
+    list.remove(5);
+    list.remove(3);
+    expect(list.toArray()).to.deep.equal([2, 4]);
+  });
+
+  it("Can remove from list by inex", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const list = List.from(arr);
+    list.removeAt(0);
+    list.removeAt(3);
+    list.removeAt(1);
+    expect(list.toArray()).to.deep.equal([2, 4]);
+  });
+
+  it("Can copy list with slice", () => {
+    const list = List.of(1, 2, 3, 4, 5);
+    const newlist = list.slice();
+    expect(newlist).to.deep.equal(list);
   });
 });
