@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const List = require("./linked-list");
 
-describe("Linked list", () => {
+describe.skip("Linked list", () => {
   it("Can List.append one item at the end", () => {
     const list = List.empty();
     List.append(8, list);

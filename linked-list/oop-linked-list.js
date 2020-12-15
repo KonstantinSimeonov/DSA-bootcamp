@@ -62,11 +62,11 @@ class List {
     this._length += 1;
     if (!this.root) {
       this.root = new Node_(value);
-      return;
+      return this;
     }
     if (index <= 0) {
       this.root = new Node_(value, this.root);
-      return;
+      return this;
     }
     let current = this.root.next;
     let prev = this.root;
@@ -77,6 +77,7 @@ class List {
       i++;
     }
     prev.next = new Node_(value, current);
+    return this;
   }
 
   get length() {
@@ -170,6 +171,9 @@ class List {
   }
 
   drop(fun) {
+    if (!this.root) {
+      return;
+    }
     let prev = this.root;
     let current = this.root.next;
     while (current.next) {
@@ -210,10 +214,8 @@ class List {
   }
 }
 
-const list = List.of(1, 2, 3, 4, 5);
+const list = List.of(2, 4, 6, 8, 10);
 
-console.log(JSON.stringify(list.toString()));
+list.drop((x) => x % 2 === 0);
 
-list.drop((x) => x % 2 !== 0);
-
-console.log(JSON.stringify(list));
+module.exports = List;
