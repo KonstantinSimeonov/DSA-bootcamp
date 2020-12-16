@@ -163,8 +163,10 @@ class List {
     let newList = new List();
     let current = this.root;
     let i = 0;
-    while (current && i >= from && i < to) {
-      newList.append(current.value);
+    while (current) {
+      if (i >= from && i < to) {
+        newList.append(current.value);
+      }
       current = current.next;
       i++;
     }
@@ -175,24 +177,24 @@ class List {
     if (!this.root) {
       return;
     }
-    let prev = this.root;
-    let current = this.root.next;
-    while (current.next) {
-      if (fun(current.value)) {
-        prev.next = current.next;
-      }
-      prev = current;
-      current = current.next;
-      this._length--;
-    }
-    if (fun(this.root)) {
+    while (fun(this.root.value)) {
       this.root = this.root.next;
       this._length--;
+      if (!this.root) break;
     }
-    if (fun(current.value)) {
-      prev.next = current.next;
-      this.tail = prev;
-      this._length--;
+    let prev = this.root;
+    if (this.root) {
+      let current = this.root.next;
+      while (current) {
+        while (fun(current.value)) {
+          prev.next = current.next;
+          this._length--;
+          if (!current.next) break;
+          current = current.next;
+        }
+        prev = current;
+        current = current.next;
+      }
     }
   }
 
@@ -215,8 +217,8 @@ class List {
   }
 }
 
-const list = List.of(2, 4, 6, 8, 10);
-
-list.drop((x) => x % 2 === 0);
+const list = List.of(1, 2, 3, 4, 5, 6, 7);
+console.log(list.drop((x) => x % 2 === 0));
+console.log(JSON.stringify(list));
 
 module.exports = List;

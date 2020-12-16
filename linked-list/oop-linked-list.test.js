@@ -107,4 +107,30 @@ describe("Linked list", () => {
     const newlist = list.slice();
     expect(newlist).to.deep.equal(list);
   });
+
+  it("Can copy empty list with slice", () => {
+    const list = new List();
+    const newlist = list.slice();
+    expect(newlist).to.deep.equal(list);
+  });
+
+  it("Can create new list with slice from list with given from and to indexes", () => {
+    const list = List.of(1, 2, 3, 4, 5);
+    const newlist = list.slice(2, 4);
+    expect(newlist.toArray()).to.deep.equal(list.toArray().slice(2, 4));
+  });
+
+  it("Can drop items that return true from a function", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const list = List.from(arr);
+    list.drop((x) => x % 2 === 0);
+    expect(list.toArray()).to.deep.equal(arr.filter((x) => x % 2 !== 0));
+  });
+
+  it("Can drop consecutive items", () => {
+    const arr = [2, 4, 6, 8, 10];
+    const list = List.from(arr);
+    list.drop((x) => x % 2 === 0);
+    expect(list.toArray()).to.deep.equal(arr.filter((x) => x % 2 !== 0));
+  });
 });
