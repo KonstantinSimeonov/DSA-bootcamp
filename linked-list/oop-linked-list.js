@@ -216,10 +216,35 @@ class List {
   toString() {
     return `List {${list.reduceLeft((a, b) => `${a} -> ${b}`) || ``}}`;
   }
+
+  halfSplit() {
+    let firstHalf = new List();
+    let secoundHalf = new List();
+    if (!this.root) return;
+    let slow = this.root;
+    let fast = this.root;
+    while (slow.next) {
+      if (fast.next && fast.next.next) {
+        firstHalf.append(slow.value);
+        fast = fast.next.next;
+      } else if (fast.next && !fast.next.next) {
+        firstHalf.append(slow.value);
+        fast = fast.next;
+      } else {
+        secoundHalf.append(slow.value);
+      }
+      slow = slow.next;
+    }
+    secoundHalf.append(slow.value);
+    return { firstHalf, secoundHalf };
+  }
 }
 
-const list = List.from(["a", "b", "c", "d", "e", "f", "j"]);
+const list = List.from([]);
 
-console.log(list.toString());
+console.log(
+  list.halfSplit().firstHalf.toArray(),
+  list.halfSplit().secoundHalf.toArray()
+);
 
 module.exports = List;
