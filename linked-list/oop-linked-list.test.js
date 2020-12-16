@@ -133,4 +133,17 @@ describe("Linked list", () => {
     list.drop((x) => x % 2 === 0);
     expect(list.toArray()).to.deep.equal(arr.filter((x) => x % 2 !== 0));
   });
+
+  it("Can reduce left", () => {
+    const arr = [1, 2, 3, 4, 5];
+    const list = List.from(arr);
+    expect(list.reduceLeft((a, b) => a + b, 0)).to.equal(
+      arr.reduce((a, b) => a + b, 0)
+    );
+  });
+
+  it("Can to string", () => {
+    const list = List.from(["a", "b", "c", "d", "e", "f", "j"]);
+    expect(list.toString()).to.equal("List {a -> b -> c -> d -> e -> f -> j}");
+  });
 });

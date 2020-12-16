@@ -173,6 +173,7 @@ class List {
     return newList;
   }
 
+  ///tail needs fixing ----- ask KON
   drop(fun) {
     if (!this.root) {
       return;
@@ -217,8 +218,8 @@ class List {
   }
 }
 
-const list = List.of(1, 2, 3, 4, 5, 6, 7);
-console.log(list.drop((x) => x % 2 === 0));
-console.log(JSON.stringify(list));
+const list = List.from(["a", "b", "c", "d", "e", "f", "j"]);
+
+console.log(list.toString());
 
 module.exports = List;
