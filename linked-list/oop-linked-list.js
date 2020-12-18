@@ -217,55 +217,25 @@ class List {
     return `List {${list.reduceLeft((a, b) => `${a} -> ${b}`) || ``}}`;
   }
 
-  halfSplit() {
-    let firstHalf = new List();
-    let secoundHalf = new List();
+  halfSplit3() {
     if (!this.root) return;
-    let slow = this.root;
-    let fast = this.root;
-    while (slow.next) {
-      if (fast.next && fast.next.next) {
-        firstHalf.append(slow.value);
-        fast = fast.next.next;
-      } else if (fast.next && !fast.next.next) {
-        firstHalf.append(slow.value);
-        fast = fast.next;
-      } else {
-        secoundHalf.append(slow.value);
-      }
-      slow = slow.next;
-    }
-    secoundHalf.append(slow.value);
-    return { firstHalf, secoundHalf };
-  }
-
-  halfSplit2() {
-    let firstHalf = new List();
-    let secoundHalf = new List();
-    if (!this.root) return;
+    let secondHalf = new List();
+    secondHalf.tail = this.tail;
     let slow = this.root;
     let fast = this.root;
     while (fast.next && fast.next.next) {
-      firstHalf.append(slow.value);
       fast = fast.next.next;
       slow = slow.next;
     }
-    firstHalf.append(slow.value);
-    slow = slow.next;
-    while (slow.next) {
-      secoundHalf.append(slow.value);
-      slow = slow.next;
-    }
-    secoundHalf.append(slow.value);
-    return { firstHalf, secoundHalf };
+    this.tail = slow;
+    secondHalf.root = slow.next;
+    secondHalf._length = Math.floor(this._length / 2);
+    this._length = Math.ceil(this._length / 2);
+    slow.next = null;
+    return secondHalf;
   }
 }
 
-const list = List.from([1, 2, 3, 4, 5, 6, 7, 8]);
-
-console.log(
-  list.halfSplit2().firstHalf.toArray(),
-  list.halfSplit2().secoundHalf.toArray()
-);
+const list = List.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
 module.exports = List;
