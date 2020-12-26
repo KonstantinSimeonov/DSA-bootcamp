@@ -173,7 +173,6 @@ class List {
     return newList;
   }
 
-  ///tail needs fixing ----- ask KON
   drop(fun) {
     if (!this.root) {
       return;
@@ -193,6 +192,7 @@ class List {
           if (!current.next) break;
           current = current.next;
         }
+        this.tail = current;
         prev = current;
         current = current.next;
       }
@@ -234,8 +234,30 @@ class List {
     slow.next = null;
     return secondHalf;
   }
+
+  changeValueAt(index, value) {
+    let current = this.root;
+    let i = 0;
+    if (!current) {
+      return undefined;
+    }
+    while (current.next) {
+      if (index === i) {
+        current.value = value;
+      }
+      current = current.next;
+      i++;
+    }
+    if (i === index) {
+      current.value = value;
+    }
+  }
 }
 
-const list = List.from([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+const list = List.from([2, 4, 6, 8]);
 
-module.exports = List;
+list.changeValueAt(3, 25);
+
+console.log(JSON.stringify(list));
+
+// module.exports = List;
