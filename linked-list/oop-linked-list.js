@@ -256,8 +256,8 @@ class List {
 
 const list = List.from([2, 4, 6, 8]);
 
-list.changeValueAt(3, 25);
+list.changeValueAt(0, 25);
 
-console.log(JSON.stringify(list));
+console.log(list.toArray());
 
 // module.exports = List;
